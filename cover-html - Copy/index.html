@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cover Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .font-roboto {
+        font-family: "Roboto", sans-serif;
+      }
+      @media print {
+        .print-scale {
+          transform: scale(1.3);
+          transform-origin: top left;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="font-roboto flex justify-center items-start mt-20 print:mt-0 print-scale"
+  >
+    <!-- Main Container -->
+    <div class="w-[2480px] h-[3508px] bg-white relative overflow-hidden z-70">
+      <!-- Blue Circle -->
+      <div
+        class="absolute w-[1800px] bg-white h-[1800px] border-[300px] border-[#4472c4] rounded-full right-[-900px] top-[-700px] z-20"
+      ></div>
+
+      <!-- University Header -->
+      <div
+        class="absolute top-[150px] left-[150px] flex items-center gap-4 z-30"
+      >
+        <img src="logo.png" alt="Logo" class="w-[230px]" />
+        <h1 class="text-[120px] font-normal uppercase">
+          <span class="text-[#f5821f]">Khulna</span>
+          <span class="text-[#6d8da1]">University</span>
+        </h1>
+      </div>
+
+      <!-- Main Content Box -->
+      <div
+        class="absolute top-[15%] left-[7.5%] w-[85%] h-[50%] border-[40px] border-black rounded-[180px] overflow-hidden z-10"
+      >
+        <!-- White Overlay Circle -->
+        <div
+          class="absolute w-[1500px] h-[1500px] bg-white rounded-full right-[-400px] top-[-600px]"
+        ></div>
+
+        <!-- Assignment Text -->
+        <div
+          class="absolute top-[10%] left-[8%] text-[80px] text-[#4472c4] font-semibold uppercase border-2 border-black py-[40px] px-[100px]"
+        >
+          ASSIGNMENT
+        </div>
+
+        <!-- "ON" Text -->
+        <div
+          class="absolute top-[25%] left-[18%] text-[100px] text-[#588413] font-medium"
+        >
+          ON
+        </div>
+
+        <!-- Title Text -->
+        <div
+          class="absolute top-[35%] left-[8%] w-[84%] text-[90px] text-[#588413] font-semibold leading-tight"
+        >
+          Exploring BLUE and analysing last 5 years questions of term final
+          examination of simple and multiple regression
+        </div>
+
+        <!-- Course Info -->
+        <div
+          class="absolute top-[70%] left-[8%] text-[40px] text-[#4472c4] space-y-8"
+        >
+          <h1 class="font-light">Course Title: Regression Analysis-I</h1>
+          <h1>Section: A</h1>
+          <h1 class="font-light">Course Code: 0542 20 stat 2203</h1>
+        </div>
+      </div>
+
+      <!-- Submission Info Table -->
+      <table class="absolute top-[68%] left-[10%] w-[80%] border-collapse">
+        <thead>
+          <tr class="bg-[#4472c4]">
+            <th
+              class="p-[50px_20px] text-[70px] font-bold text-center border-2 border-[#4472c4]"
+            >
+              SUBMITTED BY
+            </th>
+            <th
+              class="p-[50px_20px] text-[70px] font-bold text-center border-2 border-[#4472c4]"
+            >
+              SUBMITTED TO
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td
+              class="p-[40px] text-[60px] font-bold border-2 border-[#4472c4] bg-[#d9e2f3]"
+            >
+              NAME: Md. Mottuqe Brid<br />
+              ID: STUDENT ID<br />
+              YEAR: 2<sup>nd</sup> TERM: 2<sup>nd</sup><br />
+              Khulna University, Khulna
+            </td>
+            <td
+              class="p-[40px] text-[60px] font-bold border-2 border-[#4472c4] bg-[#d9e2f3]"
+            >
+              Abdur Rahman,<br />Lecturer, <br />Statistics Discipline<br />
+              Khulna University, Khulna
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Footer Section -->
+      <div
+        class="absolute bottom-[1%] left-1/2 transform -translate-x-1/2 text-center"
+      >
+        <img
+          src="./dataBar.png"
+          alt="Data Bar"
+          class="w-[1000px] mx-auto mb-8"
+        />
+        <p class="text-[50px] text-black">Date of submission:</p>
+        <h2 class="text-[70px] text-black font-semibold">Mar 06, 2025</h2>
+      </div>
+
+      <!-- Bottom Decoration -->
+      <img
+        src="./bottom.png"
+        alt="Decoration"
+        class="absolute bottom-0 left-0 w-[600px] h-[600px]"
+      />
+    </div>
+  </body>
+</html>

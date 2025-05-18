@@ -1,0 +1,178 @@
+body {
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  margin-top: 80px;
+}
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+.coverBody {
+  width: 2480px;
+  height: 3508px;
+  background-color: white;
+  position: relative;
+  /* border: 1px solid black; */
+  overflow: hidden;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.circle {
+  position: absolute;
+  width: 1500px;
+  height: 1500px;
+  border: 300px solid #4472c4;
+  border-radius: 50%;
+  right: -1200px;
+  top: -1200px;
+  z-index: +20;
+}
+.circle::after {
+  /* content: ""; */
+  /* position: absolute;
+  border: 600px solid red;
+  bottom: -500px; */
+}
+.logoName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 150px;
+  left: 150px;
+  gap: 10px;
+  z-index: +30;
+}
+
+.logoName img {
+  width: 230px;
+}
+.logoName h1 {
+  font-size: 120px;
+  color: #f5821f;
+  text-transform: uppercase;
+}
+.logoName h1 span {
+  color: #6d8da1;
+}
+.titleBox {
+  position: absolute;
+  top: 17%;
+  border: 40px solid black;
+  width: 85%;
+  height: 50%;
+  border-radius: 180px;
+  z-index: +10;
+}
+.box {
+  position: absolute;
+  background: #fff;
+  width: 1500px;
+  height: 1500px;
+  border-radius: 50%;
+  right: -400px;
+  top: -600px;
+}
+.ASSIGNMENT {
+  position: absolute;
+  top: 10%;
+  left: 200px;
+  font-size: 40px;
+  color: #4472c4;
+  text-transform: uppercase;
+  font-size: 80px;
+  font-weight: 600;
+  border: 2px solid #000;
+  padding: 40px 100px;
+}
+.on {
+  position: absolute;
+  top: 25%;
+  font-size: 100px;
+  color: #588413;
+  left: 460px;
+  font-weight: 500;
+}
+
+.ASSIGNMENTtitle {
+  font-size: 100px;
+  color: #588413;
+  /* text-transform: uppercase; */
+  font-weight: 600;
+  /* border: 2px solid #000; */
+  padding: 40px 100px;
+  position: absolute;
+  top: 40%;
+  width: 85%;
+}
+.courseTitleCode {
+  font-size: 40px;
+  color: #4472c4;
+  /* text-transform: uppercase; */
+  font-weight: 200;
+  /* border: 2px solid #000; */
+  padding: 40px 100px;
+  position: absolute;
+  top: 70%;
+  width: 85%;
+}
+.bottomShape {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 600px;
+  height: 600px;
+  /* background: #588413; */
+  /* border-radius: 180px; */
+  /* z-index: -1; */
+}
+table {
+  table-layout: fixed;
+  width: 80%;
+  border: 2px solid transparent;
+  position: absolute;
+  top: 72%;
+}
+td {
+  border: 1px solid transparent;
+  padding: 20px;
+}
+.tHeading td {
+  text-align: center;
+  padding: 50px 20px;
+  font-size: 70px;
+  font-weight: bold;
+  background-color: #4472c4;
+}
+.tBody td {
+  border: 1px solid #4472c4;
+  padding: 40px;
+  font-size: 60px;
+  font-weight: 700;
+  background-color: #d9e2f3;
+}
+.coverFooter {
+  position: absolute;
+  bottom: -3%;
+  display: flex;
+  /* gap: 0px; */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+}
+.coverFooter p {
+  font-size: 50px;
+  color: #000;
+  margin: 5px;
+}
+.coverFooter h2 {
+  font-size: 70px;
+  color: #000;
+  margin: 5px;
+}
+.coverFooter img {
+  width: 1000px;
+  margin: 5px;
+}

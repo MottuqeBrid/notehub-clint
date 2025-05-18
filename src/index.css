@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+a.active {
+  color: orange;
+}
+a.active:hover {
+  color: red;
+}
