@@ -12,7 +12,7 @@ const CoverPageDownload = () => {
   const btnRef = useRef();
   // eslint-disable-next-line no-unused-vars
   const [formData, setFormData] = useState(location.state);
-  console.log(formData);
+  // console.log(formData);
   const formattedDate = format(formData.date, "MMM dd, yyyy");
 
   const handleDownloadPDF = async () => {
@@ -23,7 +23,7 @@ const CoverPageDownload = () => {
       console.error("Element not found");
       return;
     }
-    const scale = 0.8; // Reduce scale to decrease file size
+    const scale = 2; // Reduce scale to decrease file size
 
     const canvas = await html2canvas(element, {
       scale,
@@ -247,6 +247,9 @@ const CoverPageDownload = () => {
           </button>
           <Link className="btn btn-active" to="/cover-page">
             Go back to cover page form
+          </Link>
+          <Link className="btn btn-active" to="/">
+            Go back to home
           </Link>
         </div>
       </div>

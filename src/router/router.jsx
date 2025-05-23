@@ -55,10 +55,6 @@ export const router = createBrowserRouter([
         hydrateFallbackElement: <Loading />,
         element: <TodosRoutePage />,
       },
-      // {
-      //   path: "cover-page",
-      //   element: <CoverPageGenerator />,
-      // },
       {
         path: "calculator",
         element: <DownloadForm />,

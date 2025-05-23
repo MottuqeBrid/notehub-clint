@@ -19,9 +19,9 @@ const Navbar = () => {
       <li>
         <NavLink to="/cover-page">Cover Page</NavLink>
       </li>
-      <li>
+      {/* <li>
         <NavLink to="/calculator">Calculator</NavLink>
-      </li>
+      </li> */}
       <li>
         <NavLink to="/profile">Profile</NavLink>
       </li>
@@ -31,7 +31,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
-        <div className="dropdown">
+        <div className="dropdown  lg:hidden">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -62,8 +62,8 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="">
-        {/* <input type="text" className="input" placeholder="Search Note..." /> */}
+      <div className="w-full lg:block hidden ">
+        <ul className="menu menu-horizontal">{links}</ul>
       </div>
       <div className="navbar-end">
         {location.pathname !== "/search" && (
