@@ -7,6 +7,9 @@ import TodosRoutePage from "../components/TodosRoutePage/TodosRoutePage";
 import LinksRoutePage from "../components/LinksRoutePage/LinksRoutePage";
 import ShowAllNotesPage from "../components/ShowAllNotesPage/ShowAllNotesPage";
 import SearchPage from "../components/SearchPage/SearchPage";
+import CoverPage from "../components/CoverPage/CoverPage";
+import CoverPageGenerator from "../components/CoverPage/CoverPage";
+import DownloadForm from "./../lib/Test";
 
 export const router = createBrowserRouter([
   {
@@ -16,47 +19,47 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader: () => fetch("http://localhost:3000/todo/all"),
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/todo/all`),
         hydrateFallbackElement: <Loading />,
         element: <Dashboard />,
       },
       {
         path: "notes",
-        loader: () => fetch("http://localhost:3000/todo/all"),
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/todo/all`),
         hydrateFallbackElement: <Loading />,
         element: <NotesRoutePage />,
       },
       {
         path: "search",
-        loader: () => fetch("http://localhost:3000/todo/all"),
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/todo/all`),
         hydrateFallbackElement: <Loading />,
         element: <SearchPage />,
       },
       {
         path: "all-notes",
-        loader: () => fetch("http://localhost:3000/todo/all"),
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/todo/all`),
         hydrateFallbackElement: <Loading />,
         element: <ShowAllNotesPage />,
       },
       {
         path: "links",
-        loader: () => fetch("http://localhost:3000/todo/all"),
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/todo/all`),
         hydrateFallbackElement: <Loading />,
         element: <LinksRoutePage />,
       },
       {
         path: "todos",
-        loader: () => fetch("http://localhost:3000/todo/all"),
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/todo/all`),
         hydrateFallbackElement: <Loading />,
         element: <TodosRoutePage />,
       },
       {
-        path: "calender",
-        element: <h1 className="text-2xl font-bold"> Calender</h1>,
+        path: "cover-page",
+        element: <CoverPageGenerator />,
       },
       {
         path: "calculator",
-        element: <h1 className="text-2xl font-bold"> Calculator</h1>,
+        element: <DownloadForm />,
       },
       {
         path: "*",

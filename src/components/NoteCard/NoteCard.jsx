@@ -1,20 +1,17 @@
 import { format } from "date-fns";
 import { useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
-import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
-export default function NoteCard({ note }) {
+export default function NoteCard({ note, totalNotes, setTotalNotes }) {
   const [updateTodoItem, setUpdateTodoItem] = useState(note?.todoItems);
-
-  const navigate = useNavigate();
 
   const handelUpdate = () => {
     const updateNote = {
       ...note,
       todoItems: updateTodoItem,
     };
-    fetch("http://localhost:3000/todo/update", {
+    fetch(`${import.meta.env.VITE_API_URL}/todo/update`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -29,9 +26,10 @@ export default function NoteCard({ note }) {
           draggable: true,
         });
       }
-      setTimeout(() => {
-        navigate(0);
-      }, 1500);
+      setTotalNotes(totalNotes);
+      // setTimeout(() => {
+      //   // navigate(0);
+      // }, 1500);
     });
   };
   const handleComplete = () => {
@@ -39,7 +37,7 @@ export default function NoteCard({ note }) {
       ...note,
       completed: true,
     };
-    fetch("http://localhost:3000/todo/update", {
+    fetch(`${import.meta.env.VITE_API_URL}/todo/update`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -54,9 +52,16 @@ export default function NoteCard({ note }) {
           draggable: true,
         });
       }
-      setTimeout(() => {
-        navigate(0);
-      }, 1500);
+      const updatedNotes = totalNotes.map((n) => {
+        if (n.id === note.id) {
+          return {
+            ...n,
+            completed: true,
+          };
+        }
+        return n;
+      });
+      setTotalNotes(updatedNotes);
     });
   };
 
@@ -82,7 +87,7 @@ export default function NoteCard({ note }) {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          fetch("http://localhost:3000/todo/delete/" + id, {
+          fetch(`${import.meta.env.VITE_API_URL}/todo/delete/` + id, {
             method: "DELETE",
           }).then((res) => {
             res.json();
@@ -92,9 +97,9 @@ export default function NoteCard({ note }) {
                 text: "Todo is deleted successfully.",
                 icon: "success",
               });
-              setTimeout(() => {
-                navigate(0);
-              }, 1500);
+              setTotalNotes((prevNotes) =>
+                prevNotes.filter((note) => note._id !== id)
+              );
             }
           });
         } else if (

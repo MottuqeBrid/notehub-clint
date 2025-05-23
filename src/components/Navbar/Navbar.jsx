@@ -2,7 +2,6 @@ import { Link, NavLink, useLocation } from "react-router";
 
 const Navbar = () => {
   const location = useLocation();
-  // console.log(location);
   const links = (
     <>
       <li>
@@ -18,7 +17,7 @@ const Navbar = () => {
         <NavLink to="/links">Links</NavLink>
       </li>
       <li>
-        <NavLink to="/calender">Calender</NavLink>
+        <NavLink to="/cover-page">Cover Page</NavLink>
       </li>
       <li>
         <NavLink to="/calculator">Calculator</NavLink>

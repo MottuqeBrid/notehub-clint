@@ -1,19 +1,19 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
 
-export default function AddNoteModal({ show, onClose, onSave }) {
+export default function AddNoteModal({ onSave, show, onClose }) {
   const [note, setNote] = useState({
     title: "",
     description: "",
     type: "Note",
     tags: [],
     date: new Date().toISOString(),
+    todoItems: [],
+    dueDate: "",
   });
 
   const [currentItem, setCurrentItem] = useState("");
   const [currentTags, setCurrentTags] = useState("");
 
-  const navigate = useNavigate();
   const handleAddItem = () => {
     if (currentItem.trim()) {
       setNote((prev) => ({
@@ -37,7 +37,7 @@ export default function AddNoteModal({ show, onClose, onSave }) {
   };
 
   const handleSubmit = () => {
-    fetch("http://localhost:3000/todo/add", {
+    fetch(`${import.meta.env.VITE_API_URL}/todo/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -47,19 +47,28 @@ export default function AddNoteModal({ show, onClose, onSave }) {
       }),
     })
       .then((response) => {
-        if (response.ok) {
-          console.log("Note saved successfully");
-        } else {
-          console.error("Error saving note");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
-        // console.log(data);
+        console.log("Note data:", data);
         onSave(data);
-        navigate(0);
+        onClose();
+        setNote({
+          title: "",
+          description: "",
+          type: "Note",
+          tags: [],
+          date: new Date().toISOString(),
+          todoItems: [],
+          dueDate: "",
+        });
+      })
+      .catch((error) => {
+        console.error("Error adding note:", error);
       });
-    onClose();
   };
 
   return (
@@ -67,7 +76,7 @@ export default function AddNoteModal({ show, onClose, onSave }) {
       <div className="modal-box w-11/12 max-w-2xl">
         <h3 className="font-bold text-lg mb-4">Create New Note</h3>
 
-        <div className="space-y-4">
+        <form className="space-y-4">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Note Type</span>
@@ -82,8 +91,6 @@ export default function AddNoteModal({ show, onClose, onSave }) {
               <option value="Todo">Todo</option>
             </select>
           </div>
-
-          {/* Rest of the form remains same as TypeScript version */}
 
           <div className="form-control">
             <label className="label">
@@ -204,7 +211,7 @@ export default function AddNoteModal({ show, onClose, onSave }) {
               Create Note
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
