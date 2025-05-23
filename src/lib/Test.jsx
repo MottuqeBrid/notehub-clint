@@ -3,24 +3,57 @@ import html2canvas from "html2canvas-pro";
 import jsPDF from "jspdf";
 import { Document, Packer, Paragraph, TextRun } from "docx";
 import { saveAs } from "file-saver";
+import DemoCover from "../DemoCover";
 
 export default function DownloadForm() {
   const formRef = useRef();
+  const btnRef = useRef();
+  // formRef.current.style.display = "none";
 
   const handleDownloadPDF = async () => {
+    btnRef.current.style.display = "none";
+    formRef.current.style.display = "block";
     const element = formRef.current;
-    const canvas = await html2canvas(element, { scale: 2 });
-    const imgData = canvas.toDataURL("image/png");
+    if (!element) {
+      console.error("Element not found");
+      return;
+    }
+    const scale = 0.8; // Reduce scale to decrease file size
 
-    const pdf = new jsPDF("p", "mm", "a4");
-    const width = 210;
-    const height = (canvas.height * width) / canvas.width;
-    pdf.addImage(imgData, "PNG", 0, 0, width, height);
-    pdf.save("form.pdf");
+    const canvas = await html2canvas(element, {
+      scale,
+      useCORS: true, // For external images
+      logging: false,
+      backgroundColor: "#FFFFFF",
+      removeContainer: true,
+    });
+
+    const imgData = canvas.toDataURL("image/jpeg", 0.8); // Use JPEG with 80% quality
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: [canvas.width * 0.264583, canvas.height * 0.264583], // Convert px to mm
+      compress: true,
+    });
+
+    pdf.addImage(
+      imgData,
+      "JPEG",
+      0,
+      0,
+      pdf.internal.pageSize.getWidth(),
+      pdf.internal.pageSize.getHeight()
+    );
+    pdf.save("assignment-cover.pdf");
+    formRef.current.style.display = "none";
+    btnRef.current.style.display = "grid";
   };
 
   const handleDownloadPNG = async () => {
-    const canvas = await html2canvas(formRef.current, { scale: 2 });
+    const canvas = await html2canvas(formRef.current, {
+      scale: 2,
+      useCORS: true,
+    });
     const imgData = canvas.toDataURL("image/png");
     const a = document.createElement("a");
     a.href = imgData;
@@ -29,7 +62,10 @@ export default function DownloadForm() {
   };
 
   const handleDownloadJPG = async () => {
-    const canvas = await html2canvas(formRef.current, { scale: 2 });
+    const canvas = await html2canvas(formRef.current, {
+      scale: 2,
+      useCORS: true,
+    });
     const imgData = canvas.toDataURL("image/jpeg", 1.0);
     const a = document.createElement("a");
     a.href = imgData;
@@ -70,13 +106,17 @@ export default function DownloadForm() {
   };
 
   return (
-    <div className="p-6">
-      <div ref={formRef} className="border p-4 w-[600px] bg-white shadow">
-        <h1 className="text-xl font-bold mb-2">Form Title</h1>
-        <p>This is the form content that will be downloaded.</p>
+    <div className="p-6 w-full">
+      {/* <div className="border p-4 w-full bg-white shadow overflow-autwo"> */}
+      <div className="w-full h-full ">
+        {/* <DemoCover /> */}
+        {/* </div> */}
+        <div>
+          
+        </div>
       </div>
 
-      <div className="mt-6 grid grid-cols-3 gap-5">
+      <div ref={btnRef} className="mt-6 grid grid-cols-3 gap-5">
         <button className="btn" onClick={handleDownloadPDF}>
           Download PDF
         </button>

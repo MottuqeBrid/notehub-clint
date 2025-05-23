@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router";
-import RootLayout from "../components/RootLayout/RootLayout";
+import RootLayout from "../components/Layout/RootLayout";
 import Dashboard from "../components/Dashboard/Dashboard";
 import Loading from "./../components/Loading/Loading";
 import NotesRoutePage from "../components/NotesRoutePage/NotesRoutePage";
@@ -10,6 +10,8 @@ import SearchPage from "../components/SearchPage/SearchPage";
 import CoverPage from "../components/CoverPage/CoverPage";
 import CoverPageGenerator from "../components/CoverPage/CoverPage";
 import DownloadForm from "./../lib/Test";
+import CoverLayout from "../components/Layout/CoverLayout";
+import CoverPageDownload from "../components/CoverPageDownload/CoverPageDownload";
 
 export const router = createBrowserRouter([
   {
@@ -53,10 +55,10 @@ export const router = createBrowserRouter([
         hydrateFallbackElement: <Loading />,
         element: <TodosRoutePage />,
       },
-      {
-        path: "cover-page",
-        element: <CoverPageGenerator />,
-      },
+      // {
+      //   path: "cover-page",
+      //   element: <CoverPageGenerator />,
+      // },
       {
         path: "calculator",
         element: <DownloadForm />,
@@ -70,5 +72,19 @@ export const router = createBrowserRouter([
         element: <h1 className="text-2xl font-bold"> Profile</h1>,
       },
     ],
+  },
+  {
+    path: "cover-page",
+    element: <CoverLayout />,
+    children: [
+      {
+        index: true,
+        element: <CoverPage />,
+      },
+    ],
+  },
+  {
+    path: "cover-page-generator",
+    element: <CoverPageDownload />,
   },
 ]);

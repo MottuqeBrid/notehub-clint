@@ -1,8 +1,8 @@
 import React from "react";
-import { Outlet } from "react-router";
 import Navbar from "../Navbar/Navbar";
+import { Outlet } from "react-router";
 
-const RootLayout = () => {
+const CoverLayout = () => {
   return (
     <div>
       <Navbar />
@@ -11,4 +11,4 @@ const RootLayout = () => {
   );
 };
 
-export default RootLayout;
+export default CoverLayout;
