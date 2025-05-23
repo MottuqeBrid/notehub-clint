@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router";
 import NoteCard from "../NoteCard/NoteCard";
 
 export default function LinksRoutePage() {
-  const notes = useLoaderData(); // all items from backend
   const [filteredLinks, setFilteredLinks] = useState([]);
 
   useEffect(() => {
-    const onlyLinks = notes.filter((item) => item.type === "Link");
-    setFilteredLinks(onlyLinks.reverse()); // Latest first
-  }, [notes]);
+    fetch(`${import.meta.env.VITE_API_URL}/todo/all`)
+      .then((res) => res.json())
+      .then((data) => {
+        setFilteredLinks(data.filter((note) => note.type === "Link"));
+      });
+  }, []);
 
   return (
     <div className="min-h-screen p-6 bg-base-200">
@@ -17,7 +18,12 @@ export default function LinksRoutePage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredLinks.map((note) => (
-          <NoteCard key={note._id} note={note} />
+          <NoteCard
+            key={note._id}
+            note={note}
+            totalNotes={filteredLinks}
+            setTotalNotes={setFilteredLinks}
+          />
         ))}
 
         {filteredLinks.length === 0 && (

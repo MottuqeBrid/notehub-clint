@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router";
 import NoteCard from "../NoteCard/NoteCard";
 
 export default function NotesRoutePage() {
-  const notes = useLoaderData();
   const [filteredNotes, setFilteredNotes] = useState([]);
 
   useEffect(() => {
-    const onlyNotes = notes.filter((item) => item.type === "Note");
-    setFilteredNotes(onlyNotes.reverse()); // Latest first
-  }, [notes]);
+    fetch(`${import.meta.env.VITE_API_URL}/todo/all`)
+      .then((res) => res.json())
+      .then((data) => {
+        setFilteredNotes(data.filter((note) => note.type === "Note"));
+      });
+  }, []);
 
   return (
     <div className="min-h-screen p-6 bg-base-200">
@@ -17,7 +18,12 @@ export default function NotesRoutePage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredNotes.map((note) => (
-          <NoteCard key={note._id} note={note} />
+          <NoteCard
+            key={note._id}
+            note={note}
+            totalNotes={filteredNotes}
+            setTotalNotes={setFilteredNotes}
+          />
         ))}
 
         {filteredNotes.length === 0 && (

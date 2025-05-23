@@ -19,13 +19,13 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader: () => fetch(`${import.meta.env.VITE_API_URL}/todo/all`),
+
         hydrateFallbackElement: <Loading />,
         element: <Dashboard />,
       },
       {
         path: "notes",
-        loader: () => fetch(`${import.meta.env.VITE_API_URL}/todo/all`),
+        // loader: () => ,
         hydrateFallbackElement: <Loading />,
         element: <NotesRoutePage />,
       },
