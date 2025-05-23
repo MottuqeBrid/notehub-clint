@@ -218,9 +218,9 @@ const CoverPageForm = ({ setFormData, formData, handleSubmit }) => {
                 />
               </div>
 
-              <div className="form-control">
+              {/* <div className="form-control">
                 <label className="label">
-                  <span className="label-text font-medium">Degree:</span>
+                  <span className="label-text font-medium">Teacher Degree:</span>
                 </label>
                 <input
                   type="text"
@@ -229,11 +229,11 @@ const CoverPageForm = ({ setFormData, formData, handleSubmit }) => {
                   onChange={handleChange}
                   className="input input-bordered w-full"
                 />
-              </div>
+              </div> */}
 
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text font-medium">Degree:</span>
+                  <span className="label-text font-medium">Teacher Degree:</span>
                 </label>
                 <input
                   type="text"

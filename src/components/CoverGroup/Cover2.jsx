@@ -29,7 +29,7 @@ const Cover2 = ({ formData, coverRef }) => {
 
         {/* <!-- Assignment Text --> */}
         <div className="absolute top-[10%] left-[8%] text-[40px] text-[#4472c4] font-semibold uppercase border-2 border-black py-[20px] px-[50px]">
-          ASSIGNMENT
+          {formData.coverType}
         </div>
 
         {/* <!-- "ON" Text --> */}

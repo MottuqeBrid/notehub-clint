@@ -1,11 +1,10 @@
 import { format } from "date-fns";
 const Cover1 = ({ formData, coverRef }) => {
   const formattedDate = format(formData.date, "MMM dd, yyyy");
-//   console.log(formattedDate);
   return (
     <div
       ref={coverRef}
-      className="w-[1240px] min-h-[1754px] pt-20 bg-white shadow-lg text-black mx-auto p-[96px] space-y-20 border"
+      className="w-[1240px] min-h-[1754px] pt-20 bg-white shadow-lg text-black mx-auto p-[96px] space-y-20 "
     >
       <h1 className="text-5xl font-bold text-center my-20 uppercase">
         <span className="text-[#f5821f]">Khulna</span>{" "}
@@ -19,7 +18,7 @@ const Cover1 = ({ formData, coverRef }) => {
       </div>
 
       <h1 className="text-5xl font-semibold text-center text-[#4472c4] uppercase my-20">
-        Assignment
+        {formData.coverType}
       </h1>
       <h2 className="text-3xl text-center text-[#588413] uppercase mb-10">
         ON
