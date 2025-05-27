@@ -8,20 +8,19 @@ export default function CoverPageGenerator() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    title:
-      "Exploring BLUE and analysing last 5 years questions of term final examination of simple and multiple regression",
-    courseTitle: "Regression Analysis-I",
+    title: "",
+    courseTitle: "",
     section: "Both",
-    courseCode: "0542 20 stat 2203",
-    studentName: "Md. Mottuqe Brid",
-    studentId: "232026",
+    courseCode: "",
+    studentName: "",
+    studentId: "",
     year: "2",
     term: "2",
     teacherName: "Abdur Rahman",
     studentDiscipline: "Statistics",
     teacherDiscipline: "Statistics",
     degree: "Lecturer",
-    date: "2025-05-08",
+    date: "2025-05-28",
     studentInstitute: "Khulna University, Khulna",
     teacherInstitute: "Khulna University, Khulna",
     coverType: "Assignment",

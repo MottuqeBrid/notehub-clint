@@ -84,6 +84,14 @@ const Navbar = () => {
             </svg>
           </Link>
         )}
+        <div className="flex gap-2">
+          <Link to="/signup" className="btn btn-primary">
+            Sign Up
+          </Link>
+          <Link to="/login" className="btn btn-primary">
+            Login
+          </Link>
+        </div>
         <button className="btn btn-ghost btn-circle">
           <div className="indicator">
             <svg

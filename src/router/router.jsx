@@ -12,6 +12,7 @@ import CoverPageGenerator from "../components/CoverPage/CoverPage";
 import DownloadForm from "./../lib/Test";
 import CoverLayout from "../components/Layout/CoverLayout";
 import CoverPageDownload from "../components/CoverPageDownload/CoverPageDownload";
+import SignupPage from "../components/SignupPage/SignupPage";
 
 export const router = createBrowserRouter([
   {
@@ -82,5 +83,9 @@ export const router = createBrowserRouter([
   {
     path: "cover-page-generator",
     element: <CoverPageDownload />,
+  },
+  {
+    path: "signup",
+    element: <SignupPage />,
   },
 ]);
