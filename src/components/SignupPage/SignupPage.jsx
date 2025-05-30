@@ -2,8 +2,12 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router";
 import { useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
+import useAuth from "../hooks/useAuth";
 
 export default function SignupPage() {
+  const { setUser } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -46,8 +50,20 @@ export default function SignupPage() {
       setErrors(validationErrors);
       setSubmitted(false);
     } else {
-      console.log("Form submitted:", formData);
-      setSubmitted(true);
+      axios
+        .post(`${import.meta.env.VITE_API_URL}/user/signup`, formData)
+        .then((response) => {
+          const { token, user } = response.data;
+          localStorage.setItem("Authorization", `Bearer ${token}`);
+          setSubmitted(true);
+          setUser(user);
+          // setFormData({ name: "", email: "", password: "" });
+          Swal.fire({
+            title: "Signup successful!",
+            icon: "success",
+            draggable: true,
+          });
+        });
     }
   };
 

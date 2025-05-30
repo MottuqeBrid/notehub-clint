@@ -13,6 +13,7 @@ import DownloadForm from "./../lib/Test";
 import CoverLayout from "../components/Layout/CoverLayout";
 import CoverPageDownload from "../components/CoverPageDownload/CoverPageDownload";
 import SignupPage from "../components/SignupPage/SignupPage";
+import LoginPage from "../components/LoginPage/LoginPage";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,14 @@ export const router = createBrowserRouter([
         path: "profile",
         element: <h1 className="text-2xl font-bold"> Profile</h1>,
       },
+      {
+        path: "signup",
+        element: <SignupPage />,
+      },
+      {
+        path: "login",
+        element: <LoginPage />,
+      },
     ],
   },
   {
@@ -83,9 +92,5 @@ export const router = createBrowserRouter([
   {
     path: "cover-page-generator",
     element: <CoverPageDownload />,
-  },
-  {
-    path: "signup",
-    element: <SignupPage />,
   },
 ]);
