@@ -1,7 +1,9 @@
 import { Link, NavLink, useLocation } from "react-router";
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
   const location = useLocation();
+  const { user, logout } = useAuth();
   const links = (
     <>
       <li>
@@ -22,9 +24,11 @@ const Navbar = () => {
       {/* <li>
         <NavLink to="/calculator">Calculator</NavLink>
       </li> */}
-      <li>
-        <NavLink to="/profile">Profile</NavLink>
-      </li>
+      {user && (
+        <li>
+          <NavLink to="/profile">Profile</NavLink>
+        </li>
+      )}
     </>
   );
 
@@ -84,34 +88,20 @@ const Navbar = () => {
             </svg>
           </Link>
         )}
-        <div className="flex gap-2">
-          <Link to="/signup" className="btn btn-primary">
-            Sign Up
-          </Link>
-          <Link to="/login" className="btn btn-primary">
-            Login
-          </Link>
-        </div>
-        <button className="btn btn-ghost btn-circle hidden">
-          <div className="indicator">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {" "}
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-              />{" "}
-            </svg>
-            <span className="badge badge-xs badge-primary indicator-item"></span>
+        {!user ? (
+          <div className="flex gap-2">
+            <Link to="/signup" className="btn btn-primary">
+              Sign Up
+            </Link>
+            <Link to="/login" className="btn btn-primary">
+              Login
+            </Link>
           </div>
-        </button>
+        ) : (
+          <button onClick={logout} className="btn btn-primary">
+            Log Out
+          </button>
+        )}
       </div>
     </div>
   );

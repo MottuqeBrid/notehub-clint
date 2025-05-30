@@ -1,18 +1,19 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
 
 export default function SignupPage() {
-  const { setUser } = useAuth();
+  const { setUser, loading, setLoading } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -44,23 +45,37 @@ export default function SignupPage() {
   };
 
   const handleSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setSubmitted(false);
+      setLoading(false);
     } else {
       axios
         .post(`${import.meta.env.VITE_API_URL}/user/signup`, formData)
         .then((response) => {
-          const { token, user } = response.data;
-          localStorage.setItem("Authorization", `Bearer ${token}`);
+          const { user } = response.data;
+          // localStorage.setItem("Authorization", `Bearer ${token}`);
           setSubmitted(true);
+
           setUser(user);
-          // setFormData({ name: "", email: "", password: "" });
+          setFormData({ name: "", email: "", password: "" });
           Swal.fire({
             title: "Signup successful!",
             icon: "success",
+            draggable: true,
+          });
+          setLoading(false);
+          navigate("/");
+        })
+        .catch((err) => {
+          // setLoading(false);
+          setLoading(false);
+          Swal.fire({
+            title: err.response.data.message,
+            icon: "error",
             draggable: true,
           });
         });
@@ -141,7 +156,11 @@ export default function SignupPage() {
             className="w-full bg-blue-600 text-white py-2 rounded-lg mt-4 font-semibold"
             type="submit"
           >
-            Sign Up
+            {loading ? (
+              <span className="loading loading-ring loading-xl"></span>
+            ) : (
+              "Sign Up"
+            )}
           </motion.button>
         </form>
 

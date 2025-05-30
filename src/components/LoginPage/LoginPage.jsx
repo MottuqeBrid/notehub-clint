@@ -1,8 +1,11 @@
+import axios from "axios";
 import { motion as Motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router";
+import useAuth from "../hooks/useAuth";
 
 export default function LoginPage() {
+  const { setUser, loading, setLoading } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -10,6 +13,7 @@ export default function LoginPage() {
 
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,21 +25,36 @@ export default function LoginPage() {
     if (!formData.email.trim()) newErrors.email = "Email is required";
     if (!formData.password) {
       newErrors.password = "Password is required";
-    } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
     }
     return newErrors;
   };
 
   const handleSubmit = (e) => {
+    setShowMessage(true);
     e.preventDefault();
+    setLoading(true);
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setSubmitted(false);
+      setLoading(false);
     } else {
       console.log("Login data:", formData);
-      setSubmitted(true);
+      axios
+        .post(`${import.meta.env.VITE_API_URL}/user/login`, formData)
+        .then((res) => {
+          // console.log(res);
+          setUser(res.data.user);
+          setSubmitted(true);
+          setLoading(false);
+          setErrors({});
+        })
+        .catch((err) => {
+          console.log(err);
+          setUser(null);
+          setSubmitted(false);
+          setLoading(false);
+        });
     }
   };
 
@@ -96,15 +115,24 @@ export default function LoginPage() {
             className="w-full bg-indigo-600 text-white py-2 rounded-lg mt-4 font-semibold"
             type="submit"
           >
-            Log In
+            {loading ? (
+              <span className="loading loading-spinner text-white"></span>
+            ) : (
+              "Log In"
+            )}
           </Motion.button>
         </form>
 
-        {submitted && (
-          <p className="mt-4 text-green-600 text-center font-medium">
-            ✅ Login successful!
-          </p>
-        )}
+        {showMessage &&
+          (submitted ? (
+            <p className="mt-4 text-green-600 text-center font-medium">
+              ✅ Login successful!
+            </p>
+          ) : (
+            <p className="mt-4 text-red-600 text-center font-medium">
+              ❌ Login failed!
+            </p>
+          ))}
 
         <p className="mt-4 text-center text-gray-500 text-sm">
           Don’t have an account?{" "}
