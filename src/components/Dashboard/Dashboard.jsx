@@ -4,43 +4,60 @@ import AddNoteModal from "../AddNoteModal/AddNoteModal";
 // import { Link, useLoaderData } from "react-router";
 import NotesPage from "../NotesPage/NotesPage";
 import StatsCards from "../StatsCards/StatsCards";
+import axios from "axios";
+// import { useLoaderData } from "react-router";
 
 export default function Dashboard() {
   // const initialTodo = useLoaderData();
+  // console.log(initialTodo);
+
   const [showModal, setShowModal] = useState(false);
   const [totalNotes, setTotalNotes] = useState([]);
   const [todos, setTodos] = useState(
-    totalNotes.filter((todo) => todo.type === "Todo")
+    totalNotes?.filter((todo) => todo.type === "Todo")
   );
   const [links, setLinks] = useState(
-    totalNotes.filter((todo) => todo.type === "Link")
+    totalNotes?.filter((todo) => todo.type === "Link")
   );
   const [note, setNote] = useState(
-    totalNotes.filter((todo) => todo.type === "Note")
+    totalNotes?.filter((todo) => todo.type === "Note")
   );
+  console.log(totalNotes);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/todo/all`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include", // Include cookies in the request
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setTotalNotes(data);
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/todo/all`, {
+        withCredentials: true,
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+      })
+      .then((res) => {
+        console.log(res);
+        setTotalNotes(res.data);
       });
+    // fetch(`${import.meta.env.VITE_API_URL}/todo/all`, {
+    //   method:import { axios } from 'axios';
+
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   credentials: "include",
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     setTotalNotes(data);
+    //   });
   }, []);
 
   useEffect(() => {
-    setTodos(totalNotes.filter((todo) => todo.type === "Todo"));
-    setLinks(totalNotes.filter((todo) => todo.type === "Link"));
-    setNote(totalNotes.filter((todo) => todo.type === "Note"));
+    setTodos(totalNotes?.filter((todo) => todo.type === "Todo"));
+    setLinks(totalNotes?.filter((todo) => todo.type === "Link"));
+    setNote(totalNotes?.filter((todo) => todo.type === "Note"));
   }, [totalNotes]);
 
   const onSave = (newNote) => {
-    console.log(newNote);
     setTotalNotes((prevNotes) => [newNote, ...prevNotes]);
     setShowModal(false);
   };
