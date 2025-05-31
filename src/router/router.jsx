@@ -47,7 +47,14 @@ export const router = createBrowserRouter([
       },
       {
         path: "search",
-        loader: () => fetch(`${import.meta.env.VITE_API_URL}/todo/all`),
+        loader: () =>
+          fetch(`${import.meta.env.VITE_API_URL}/todo/all`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }),
         hydrateFallbackElement: <Loading />,
         element: (
           <PrivateRoute>
@@ -57,7 +64,14 @@ export const router = createBrowserRouter([
       },
       {
         path: "all-notes",
-        loader: () => fetch(`${import.meta.env.VITE_API_URL}/todo/all`),
+        loader: () =>
+          fetch(`${import.meta.env.VITE_API_URL}/todo/all`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include", // Include cookies in the request
+          }),
         hydrateFallbackElement: <Loading />,
         element: (
           <PrivateRoute>
@@ -67,7 +81,14 @@ export const router = createBrowserRouter([
       },
       {
         path: "links",
-        loader: () => fetch(`${import.meta.env.VITE_API_URL}/todo/all`),
+        loader: () =>
+          fetch(`${import.meta.env.VITE_API_URL}/todo/all`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include", // Include cookies in the request
+          }),
         hydrateFallbackElement: <Loading />,
         element: (
           <PrivateRoute>
@@ -77,7 +98,14 @@ export const router = createBrowserRouter([
       },
       {
         path: "todos",
-        loader: () => fetch(`${import.meta.env.VITE_API_URL}/todo/all`),
+        loader: () =>
+          fetch(`${import.meta.env.VITE_API_URL}/todo/all`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include", // Include cookies in the request
+          }),
         hydrateFallbackElement: <Loading />,
         element: (
           <PrivateRoute>

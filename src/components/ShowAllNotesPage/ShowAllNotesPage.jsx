@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import NoteCard from "../NoteCard/NoteCard";
 import ScrollToTop from "../../lib/ScrollToTop";
 
@@ -11,35 +11,42 @@ export default function ShowAllNotesPage() {
   const [activeFilter, setActiveFilter] = useState("All");
 
   useEffect(() => {
-    applyFilter(activeFilter);
-  }, [allItems, activeFilter]);
-
-  const applyFilter = (filter) => {
-    if (filter === "All") {
+    if (activeFilter === "All") {
       setFilteredItems(allItems.slice());
     } else {
-      setFilteredItems(allItems.filter((item) => item.type === filter));
+      setFilteredItems(allItems.filter((item) => item.type === activeFilter));
     }
-  };
+  }, [allItems, activeFilter]);
 
   return (
     <div className="min-h-screen p-6 bg-base-200">
       <ScrollToTop />
       <h1 className="text-3xl font-bold mb-6">Browse Your Items</h1>
 
-      {/* Filter Menu */}
-      <div className="flex gap-2 mb-6 flex-wrap">
-        {FILTERS.map((filter) => (
-          <button
-            key={filter}
-            className={`btn btn-sm ${
-              activeFilter === filter ? "btn-primary" : "btn-outline"
-            }`}
-            onClick={() => setActiveFilter(filter)}
+      <div className="flex flex-col gap-3 sm:flex-row items-start sm:justify-between">
+        {/* Filter Menu */}
+        <div className="flex gap-2 mb-6 flex-wrap">
+          {FILTERS.map((filter) => (
+            <button
+              key={filter}
+              className={`btn btn-sm ${
+                activeFilter === filter ? "btn-primary" : "btn-outline"
+              }`}
+              onClick={() => setActiveFilter(filter)}
+            >
+              {filter === "Todo" ? "Tasks" : filter}
+            </button>
+          ))}
+        </div>
+        <div className="flex justify-end mb-6">
+          <Link
+            to="/search"
+            className="btn btn-primary"
+            onClick={() => setActiveFilter("All")}
           >
-            {filter}
-          </button>
-        ))}
+            Search All
+          </Link>
+        </div>
       </div>
 
       {/* Display Cards */}

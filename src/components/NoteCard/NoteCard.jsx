@@ -11,26 +11,33 @@ export default function NoteCard({ note, totalNotes, setTotalNotes }) {
       ...note,
       todoItems: updateTodoItem,
     };
+    // console.log(updateNote);
     fetch(`${import.meta.env.VITE_API_URL}/todo/update`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
+
       body: JSON.stringify(updateNote),
-    }).then((res) => {
-      res.json();
-      if (res.ok) {
-        Swal.fire({
-          title: "Todo Updated successfully",
-          icon: "success",
-          draggable: true,
-        });
-      }
-      setTotalNotes(totalNotes);
-      // setTimeout(() => {
-      //   // navigate(0);
-      // }, 1500);
-    });
+    })
+      .then((res) => {
+        if (res.ok) {
+          Swal.fire({
+            title: "Todo Updated successfully",
+            icon: "success",
+            draggable: true,
+          });
+        }
+        setTotalNotes(totalNotes);
+        // setTimeout(() => {
+        //   // navigate(0);
+        // }, 1500);
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
   };
   const handleComplete = () => {
     const updateNote = {
@@ -42,6 +49,7 @@ export default function NoteCard({ note, totalNotes, setTotalNotes }) {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(updateNote),
     }).then((res) => {
       res.json();
@@ -89,6 +97,10 @@ export default function NoteCard({ note, totalNotes, setTotalNotes }) {
         if (result.isConfirmed) {
           fetch(`${import.meta.env.VITE_API_URL}/todo/delete/` + id, {
             method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
           }).then((res) => {
             res.json();
             if (res.ok) {

@@ -2,7 +2,17 @@ import { Link } from "react-router";
 
 export default function NoteCard({ note }) {
   return (
-    <div className="card bg-base-100 shadow-md border">
+    <div
+      className={` ${
+        note.type === "Link"
+          ? "bg-[#E0E7FF]"
+          : note.type === "Todo"
+          ? "bg-[#DBFCE7]"
+          : note.type === "Note"
+          ? "bg-[#FEF9C2]"
+          : "bg-base-100"
+      } card  shadow-md hover:shadow-lg transition-shadow rounded-lg`}
+    >
       <div className="card-body">
         <div className="flex justify-between items-center">
           <h2 className="card-title">{note.title}</h2>

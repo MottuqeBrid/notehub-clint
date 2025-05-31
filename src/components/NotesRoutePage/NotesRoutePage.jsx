@@ -5,7 +5,13 @@ export default function NotesRoutePage() {
   const [filteredNotes, setFilteredNotes] = useState([]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/todo/all`)
+    fetch(`${import.meta.env.VITE_API_URL}/todo/all`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include", // Include cookies in the request
+    })
       .then((res) => res.json())
       .then((data) => {
         setFilteredNotes(data.filter((note) => note.type === "Note"));

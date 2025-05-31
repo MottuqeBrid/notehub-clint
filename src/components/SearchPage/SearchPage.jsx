@@ -9,7 +9,7 @@ export default function SearchPage() {
 
   useEffect(() => {
     if (searchText.trim() === "") {
-      setResults([]);
+      setResults(allItems);
       return;
     }
 

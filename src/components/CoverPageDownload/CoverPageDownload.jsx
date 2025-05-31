@@ -5,11 +5,14 @@ import jsPDF from "jspdf";
 import { Document, Packer, Paragraph, TextRun } from "docx";
 // import { saveAs } from "file-saver";
 import { Link, useLocation } from "react-router";
+import axios from "axios";
+import useAuth from "../hooks/useAuth";
 
 const CoverPageDownload = () => {
   const location = useLocation();
   const formRef = useRef();
   const btnRef = useRef();
+  const { user } = useAuth();
   // eslint-disable-next-line no-unused-vars
   const [formData, setFormData] = useState(location.state);
   // console.log(formData);
@@ -23,6 +26,14 @@ const CoverPageDownload = () => {
       console.error("Element not found");
       return;
     }
+
+    const coverData = {
+      ...formData,
+      user: user?._id || "guest", // Use user ID if available, otherwise use 'guest'
+    };
+
+    axios.post(`${import.meta.env.VITE_API_URL}/cover/add`, coverData);
+
     const scale = 2; // Reduce scale to decrease file size
 
     const canvas = await html2canvas(element, {

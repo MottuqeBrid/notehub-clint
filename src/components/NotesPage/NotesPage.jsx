@@ -95,7 +95,7 @@ export default function NotesPage({
       </div>
 
       <div className="flex w-full justify-center mt-8">
-        {totalNotes.length > 12 && (
+        {totalNotes && (
           <Link to="/all-notes" className="btn btn-soft btn-info">
             Show All
           </Link>

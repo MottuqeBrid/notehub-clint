@@ -5,7 +5,13 @@ export default function LinksRoutePage() {
   const [filteredLinks, setFilteredLinks] = useState([]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/todo/all`)
+    fetch(`${import.meta.env.VITE_API_URL}/todo/all`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         setFilteredLinks(data.filter((note) => note.type === "Link"));
