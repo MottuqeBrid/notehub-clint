@@ -34,7 +34,7 @@ export default function Dashboard() {
       })
       .then((res) => {
         console.log(res);
-        setTotalNotes(res.data);
+        setTotalNotes(res.data || []);
       });
     // fetch(`${import.meta.env.VITE_API_URL}/todo/all`, {
     //   method:import { axios } from 'axios';
