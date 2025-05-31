@@ -1,8 +1,9 @@
 import axios from "axios";
 import { motion as Motion } from "framer-motion";
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
 
 export default function LoginPage() {
   const { setUser, loading, setLoading } = useAuth();
@@ -12,14 +13,12 @@ export default function LoginPage() {
   });
 
   const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: "" });
   };
-
+  const navigate = useNavigate();
   const validate = () => {
     const newErrors = {};
     if (!formData.email.trim()) newErrors.email = "Email is required";
@@ -30,29 +29,31 @@ export default function LoginPage() {
   };
 
   const handleSubmit = (e) => {
-    setShowMessage(true);
     e.preventDefault();
     setLoading(true);
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-      setSubmitted(false);
       setLoading(false);
     } else {
-      console.log("Login data:", formData);
       axios
         .post(`${import.meta.env.VITE_API_URL}/user/login`, formData)
         .then((res) => {
           // console.log(res);
           setUser(res.data.user);
-          setSubmitted(true);
           setLoading(false);
+          Swal.fire({
+            title: "Login successful!",
+            icon: "success",
+            draggable: true,
+          });
+          setLoading(false);
+          navigate("/dashboard");
           setErrors({});
         })
         .catch((err) => {
           console.log(err);
           setUser(null);
-          setSubmitted(false);
           setLoading(false);
         });
     }
@@ -122,17 +123,6 @@ export default function LoginPage() {
             )}
           </Motion.button>
         </form>
-
-        {showMessage &&
-          (submitted ? (
-            <p className="mt-4 text-green-600 text-center font-medium">
-              ✅ Login successful!
-            </p>
-          ) : (
-            <p className="mt-4 text-red-600 text-center font-medium">
-              ❌ Login failed!
-            </p>
-          ))}
 
         <p className="mt-4 text-center text-gray-500 text-sm">
           Don’t have an account?{" "}

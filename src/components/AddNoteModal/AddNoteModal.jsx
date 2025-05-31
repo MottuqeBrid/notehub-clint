@@ -1,6 +1,8 @@
 import { useState } from "react";
+import useAuth from "../hooks/useAuth";
 
 export default function AddNoteModal({ onSave, show, onClose }) {
+  const { user } = useAuth();
   const [note, setNote] = useState({
     title: "",
     description: "",
@@ -42,7 +44,9 @@ export default function AddNoteModal({ onSave, show, onClose }) {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({
+        userId: user._id,
         ...note,
       }),
     })
@@ -53,7 +57,7 @@ export default function AddNoteModal({ onSave, show, onClose }) {
         return response.json();
       })
       .then((data) => {
-        console.log("Note data:", data);
+        console.log("Note data:", data.data);
         onSave(data);
         onClose();
         setNote({

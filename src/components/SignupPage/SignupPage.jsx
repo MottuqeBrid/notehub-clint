@@ -68,7 +68,7 @@ export default function SignupPage() {
             draggable: true,
           });
           setLoading(false);
-          navigate("/");
+          navigate("/dashboard");
         })
         .catch((err) => {
           // setLoading(false);

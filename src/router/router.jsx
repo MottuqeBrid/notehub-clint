@@ -14,6 +14,8 @@ import CoverLayout from "../components/Layout/CoverLayout";
 import CoverPageDownload from "../components/CoverPageDownload/CoverPageDownload";
 import SignupPage from "../components/SignupPage/SignupPage";
 import LoginPage from "../components/LoginPage/LoginPage";
+import HomePage from "../components/HomePage/HomePage";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -25,37 +27,63 @@ export const router = createBrowserRouter([
         index: true,
 
         hydrateFallbackElement: <Loading />,
-        element: <Dashboard />,
+        element: <HomePage />,
+      },
+      {
+        path: "dashboard",
+        element: (
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        ),
       },
       {
         path: "notes",
-        // loader: () => ,
-        hydrateFallbackElement: <Loading />,
-        element: <NotesRoutePage />,
+        element: (
+          <PrivateRoute>
+            <NotesRoutePage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "search",
         loader: () => fetch(`${import.meta.env.VITE_API_URL}/todo/all`),
         hydrateFallbackElement: <Loading />,
-        element: <SearchPage />,
+        element: (
+          <PrivateRoute>
+            <SearchPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "all-notes",
         loader: () => fetch(`${import.meta.env.VITE_API_URL}/todo/all`),
         hydrateFallbackElement: <Loading />,
-        element: <ShowAllNotesPage />,
+        element: (
+          <PrivateRoute>
+            <ShowAllNotesPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "links",
         loader: () => fetch(`${import.meta.env.VITE_API_URL}/todo/all`),
         hydrateFallbackElement: <Loading />,
-        element: <LinksRoutePage />,
+        element: (
+          <PrivateRoute>
+            <LinksRoutePage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "todos",
         loader: () => fetch(`${import.meta.env.VITE_API_URL}/todo/all`),
         hydrateFallbackElement: <Loading />,
-        element: <TodosRoutePage />,
+        element: (
+          <PrivateRoute>
+            <TodosRoutePage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "calculator",
@@ -67,7 +95,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <h1 className="text-2xl font-bold"> Profile</h1>,
+        element: (
+          <PrivateRoute>
+            <h1 className="text-2xl font-bold"> Profile</h1>
+          </PrivateRoute>
+        ),
       },
       {
         path: "signup",
@@ -85,7 +117,11 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <CoverPage />,
+        element: (
+          <PrivateRoute>
+            <CoverPage />
+          </PrivateRoute>
+        ),
       },
     ],
   },

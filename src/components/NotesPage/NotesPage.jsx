@@ -34,7 +34,7 @@ export default function NotesPage({
             }`}
             onClick={() => setSelectedCategory(category)}
           >
-            {category}
+            {category === "Todo" ? "Tasks" : category}
           </button>
         ))}
         <Link className="btn" to="/cover-page">

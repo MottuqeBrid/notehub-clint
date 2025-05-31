@@ -7,7 +7,6 @@ import StatsCards from "../StatsCards/StatsCards";
 
 export default function Dashboard() {
   // const initialTodo = useLoaderData();
-
   const [showModal, setShowModal] = useState(false);
   const [totalNotes, setTotalNotes] = useState([]);
   const [todos, setTodos] = useState(
@@ -21,9 +20,17 @@ export default function Dashboard() {
   );
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/todo/all`)
+    fetch(`${import.meta.env.VITE_API_URL}/todo/all`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include", // Include cookies in the request
+    })
       .then((res) => res.json())
-      .then((data) => setTotalNotes(data));
+      .then((data) => {
+        setTotalNotes(data);
+      });
   }, []);
 
   useEffect(() => {

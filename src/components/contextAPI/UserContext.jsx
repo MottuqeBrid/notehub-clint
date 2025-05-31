@@ -27,6 +27,7 @@ export const UserProvider = ({ children }) => {
         { withCredentials: true }
       )
       .then((response) => {
+        console.log(response);
         {
           if (response.data.success) {
             setUser(null);
@@ -40,13 +41,9 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_API_URL}/user/me`, {
-        // headers: {
-        //   Authorization: localStorage.getItem("Authorization"),
-        // },
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response);
         if (response.data.success === false) {
           setUser(null);
           setLoading(false);
