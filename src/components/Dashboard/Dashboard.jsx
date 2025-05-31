@@ -1,16 +1,11 @@
 // pages/Dashboard.jsx
 import { useEffect, useState } from "react";
 import AddNoteModal from "../AddNoteModal/AddNoteModal";
-// import { Link, useLoaderData } from "react-router";
 import NotesPage from "../NotesPage/NotesPage";
 import StatsCards from "../StatsCards/StatsCards";
 import axios from "axios";
-// import { useLoaderData } from "react-router";
 
 export default function Dashboard() {
-  // const initialTodo = useLoaderData();
-  // console.log(initialTodo);
-
   const [showModal, setShowModal] = useState(false);
   const [totalNotes, setTotalNotes] = useState([]);
   const [todos, setTodos] = useState(
@@ -28,27 +23,10 @@ export default function Dashboard() {
     axios
       .get(`${import.meta.env.VITE_API_URL}/todo/all`, {
         withCredentials: true,
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
       })
       .then((res) => {
-        console.log(res);
         setTotalNotes(res.data || []);
       });
-    // fetch(`${import.meta.env.VITE_API_URL}/todo/all`, {
-    //   method:import { axios } from 'axios';
-
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   credentials: "include",
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     setTotalNotes(data);
-    //   });
   }, []);
 
   useEffect(() => {

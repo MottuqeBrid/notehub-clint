@@ -31,15 +31,6 @@ export const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        // loader: () =>
-        //   fetch(`${import.meta.env.VITE_API_URL}/todo/all`, {
-        //     method: "GET",
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //     },
-        //     credentials: "include", // Include cookies in the request
-        //   }),
-        // hydrateFallbackElement: <Loading />,
         element: (
           <PrivateRoute>
             <Dashboard />
@@ -90,15 +81,6 @@ export const router = createBrowserRouter([
       },
       {
         path: "links",
-        loader: () =>
-          fetch(`${import.meta.env.VITE_API_URL}/todo/all`, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include", // Include cookies in the request
-          }),
-        hydrateFallbackElement: <Loading />,
         element: (
           <PrivateRoute>
             <LinksRoutePage />
@@ -107,15 +89,6 @@ export const router = createBrowserRouter([
       },
       {
         path: "todos",
-        loader: () =>
-          fetch(`${import.meta.env.VITE_API_URL}/todo/all`, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include", // Include cookies in the request
-          }),
-        hydrateFallbackElement: <Loading />,
         element: (
           <PrivateRoute>
             <TodosRoutePage />
