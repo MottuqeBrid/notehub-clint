@@ -17,7 +17,6 @@ export default function Dashboard() {
   const [note, setNote] = useState(
     totalNotes?.filter((todo) => todo.type === "Note")
   );
-  console.log(totalNotes);
 
   useEffect(() => {
     axios
