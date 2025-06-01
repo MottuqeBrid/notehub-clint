@@ -1,12 +1,13 @@
 import axios from "axios";
 import { motion as Motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 
 export default function LoginPage() {
-  const { setUser, loading, setLoading } = useAuth();
+  const navigate = useNavigate();
+  const { setUser, loading, setLoading, user } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -14,11 +15,17 @@ export default function LoginPage() {
 
   const [errors, setErrors] = useState({});
 
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: "" });
   };
-  const navigate = useNavigate();
+
   const validate = () => {
     const newErrors = {};
     if (!formData.email.trim()) newErrors.email = "Email is required";

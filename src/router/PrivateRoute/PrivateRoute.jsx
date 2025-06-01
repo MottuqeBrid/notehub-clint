@@ -6,31 +6,19 @@ import AccountBlocked from "../../components/AccountBlocked/AccountBlocked";
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
-
-  //   const { userType } = user;
-  //   console.log(isBlocked);
-  if (!loading && user && user?.isVerified && user?.userType === "user") {
+  if (
+    !loading &&
+    user &&
+    !user?.isBlocked &&
+    user?.isVerified &&
+    user?.userType === "user"
+  ) {
     return children;
   } else if (!loading && user?.isBlocked) {
     return <AccountBlocked />;
   } else if (!loading && !user) {
     navigate("/login");
   }
-
-  //   useEffect(() => {
-  //     if (!loading && !user) {
-  //       navigate("/login");
-  //     } else if (
-  //       !loading &&
-  //       user &&
-  //       user?.isVerified &&
-  //       user?.userType === "user"
-  //     ) {
-  //       return children;
-  //     } else if (!loading && user?.isBlocked) {
-  //       return <AccountBlocked />;
-  //     }
-  //   }, [user, loading, children, navigate]);
 };
 
 export default PrivateRoute;

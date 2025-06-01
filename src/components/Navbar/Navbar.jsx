@@ -9,9 +9,9 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
 
-      {/* <li>
+      <li>
         <NavLink to="/calculator">Calculator</NavLink>
-      </li> */}
+      </li>
       {user && (
         <>
           <li>

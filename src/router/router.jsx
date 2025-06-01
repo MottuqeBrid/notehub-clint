@@ -16,6 +16,10 @@ import SignupPage from "../components/SignupPage/SignupPage";
 import LoginPage from "../components/LoginPage/LoginPage";
 import HomePage from "../components/HomePage/HomePage";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import WelcomePage from "../WelcomePage/WelcomePage";
+import AccountBlocked from "../components/AccountBlocked/AccountBlocked";
+import ProfilePage from "../components/ProfilePage/ProfilePage";
+import ProfileUpdateForm from "../components/ProfileUpdateForm/ProfileUpdateForm";
 
 export const router = createBrowserRouter([
   {
@@ -97,7 +101,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "calculator",
-        element: <DownloadForm />,
+        element: <AccountBlocked />,
       },
       {
         path: "*",
@@ -107,7 +111,15 @@ export const router = createBrowserRouter([
         path: "profile",
         element: (
           <PrivateRoute>
-            <h1 className="text-2xl font-bold"> Profile</h1>
+            <ProfilePage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "update-profile",
+        element: (
+          <PrivateRoute>
+            <ProfileUpdateForm />
           </PrivateRoute>
         ),
       },

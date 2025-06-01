@@ -1,13 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
 
 export default function SignupPage() {
-  const { setUser, loading, setLoading } = useAuth();
+  const { setUser, loading, setLoading, user } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,6 +17,12 @@ export default function SignupPage() {
 
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
