@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 axios.defaults.withCredentials = true;
 // eslint-disable-next-line react-refresh/only-export-components
 export const UserContext = createContext();
@@ -7,19 +7,14 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  // console.log(user);
 
   const login = (userData) => {
     setUser(userData);
   };
 
-  const logout = () => {
+  const logout = useCallback(() => {
     // Remove token from localStorage
     localStorage.removeItem("Authorization");
-
-    // Remove token from axios headers
-    // axios.defaults.headers.common["Authorization"] = null;
-
     axios
       .patch(
         `${import.meta.env.VITE_API_URL}/user/logout`,
@@ -28,16 +23,15 @@ export const UserProvider = ({ children }) => {
       )
       .then((response) => {
         console.log(response);
-        {
-          if (response.data.success) {
-            setUser(null);
-          }
+        if (response.data.success) {
+          setUser(null);
         }
       })
+      // eslint-disable-next-line no-unused-vars
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
-  };
+  }, [user]);
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_API_URL}/user/me`, {
@@ -52,11 +46,20 @@ export const UserProvider = ({ children }) => {
         setUser(response.data.user);
         setLoading(false);
       })
-      .catch(() => {
-        setUser(null);
+      .catch((err) => {
+        // console.log(err);
+        if (
+          (err.response && err.response.status === 401) ||
+          err.response.status === 403 ||
+          err.response.status === 400
+        ) {
+          // User is not authenticated
+          logout();
+          setUser(null);
+        }
         setLoading(false);
       });
-  }, []);
+  }, [logout]);
 
   const contextData = { loading, setLoading, user, login, logout, setUser };
 
