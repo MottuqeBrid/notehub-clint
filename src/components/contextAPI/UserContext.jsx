@@ -59,7 +59,8 @@ export const UserProvider = ({ children }) => {
         }
         setLoading(false);
       });
-  }, [logout]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const contextData = { loading, setLoading, user, login, logout, setUser };
 

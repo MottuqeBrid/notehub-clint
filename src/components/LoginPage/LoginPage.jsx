@@ -10,7 +10,7 @@ export default function LoginPage() {
   const { setUser, loading, setLoading, user } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
+    password: "123456Aa",
   });
 
   const [errors, setErrors] = useState({});
@@ -44,7 +44,9 @@ export default function LoginPage() {
       setLoading(false);
     } else {
       axios
-        .post(`${import.meta.env.VITE_API_URL}/user/login`, formData)
+        .post(`${import.meta.env.VITE_API_URL}/user/login`, formData, {
+          withCredentials: true,
+        })
         .then((res) => {
           // console.log(res);
           setUser(res.data.user);
