@@ -10,7 +10,7 @@ export default function LoginPage() {
   const { setUser, loading, setLoading, user } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
-    password: "123456Aa",
+    password: "",
   });
 
   const [errors, setErrors] = useState({});
