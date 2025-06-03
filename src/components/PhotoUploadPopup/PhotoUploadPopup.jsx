@@ -16,7 +16,7 @@ export default function PhotoUploadPopup({ setUser, user }) {
     singleFormData.append("image", singleFile);
 
     const response = await fetch(
-      `https://api.imgbb.com/1/upload?expiration=600&key=${apiKey}`,
+      `https://api.imgbb.com/1/upload?key=${apiKey}`,
       {
         method: "POST",
         body: singleFormData,
