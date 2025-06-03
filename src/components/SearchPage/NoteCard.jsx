@@ -1,5 +1,3 @@
-import { Link } from "react-router";
-
 export default function NoteCard({ note }) {
   return (
     <div
@@ -16,7 +14,9 @@ export default function NoteCard({ note }) {
       <div className="card-body">
         <div className="flex justify-between items-center">
           <h2 className="card-title">{note.title}</h2>
-          <span className="badge badge-outline text-xs">{note.type}</span>
+          <span className="badge badge-outline text-xs">
+            {note.type === "Todo" ? "Task" : note.type}
+          </span>
         </div>
 
         {note.description && (

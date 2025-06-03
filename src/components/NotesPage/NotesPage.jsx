@@ -10,6 +10,7 @@ export default function NotesPage({
   note,
   totalNotes,
   setTotalNotes,
+  results,
 }) {
   // console.log(totalNotes);
   const [notes, setNotes] = useState(totalNotes);
@@ -49,7 +50,7 @@ export default function NotesPage({
           </div>
         )}
         {selectedCategory === "all" &&
-          totalNotes
+          results
             .slice(0, 12)
             .map((note, i) => (
               <NoteCard

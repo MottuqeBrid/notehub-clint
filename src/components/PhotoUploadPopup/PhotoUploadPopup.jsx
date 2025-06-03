@@ -11,7 +11,7 @@ export default function PhotoUploadPopup({ setUser, user }) {
   };
 
   const uploadImage = async (singleFile) => {
-    const apiKey = "e886cf72a11f7bf0816042684c2160d0";
+    const apiKey = import.meta.env.VITE_IMGBB_API_KEY;
     const singleFormData = new FormData();
     singleFormData.append("image", singleFile);
 
@@ -63,6 +63,7 @@ export default function PhotoUploadPopup({ setUser, user }) {
         `${import.meta.env.VITE_API_URL}/user/update-profile`,
         {
           bio: {
+            ...user.bio,
             photo: uploadedPhotoUrls,
           },
         },

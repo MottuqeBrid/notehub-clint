@@ -20,6 +20,7 @@ import WelcomePage from "../WelcomePage/WelcomePage";
 import AccountBlocked from "../components/AccountBlocked/AccountBlocked";
 import ProfilePage from "../components/ProfilePage/ProfilePage";
 import ProfileUpdateForm from "../components/ProfileUpdateForm/ProfileUpdateForm";
+import OTPVerification from "../components/OTPVerification/OTPVerification";
 
 export const router = createBrowserRouter([
   {
@@ -146,6 +147,10 @@ export const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "otp",
+    element: <OTPVerification />,
   },
   {
     path: "cover-page-generator",

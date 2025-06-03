@@ -379,7 +379,7 @@ export default function NoteCard({ note, totalNotes, setTotalNotes }) {
           </h2>
           <div className="flex items-center gap-2 flex-shrink-0">
             <span className="badge badge-info badge-sm capitalize">
-              {note.type}
+              {note.type === "Todo" ? "Task" : note.type}
             </span>
             <button
               onClick={() => handelDelete(note._id)}

@@ -24,7 +24,7 @@ export default function SearchPage() {
 
   return (
     <div className="min-h-screen bg-base-200 p-6">
-      <h1 className="text-3xl font-bold mb-4">Search Notes, Links & Todos</h1>
+      <h1 className="text-3xl font-bold mb-4">Search Notes, Links & Tasks</h1>
 
       <input
         type="text"

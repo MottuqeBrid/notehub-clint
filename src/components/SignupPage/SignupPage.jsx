@@ -73,8 +73,8 @@ export default function SignupPage() {
             icon: "success",
             draggable: true,
           });
+          navigate("/otp");
           setLoading(false);
-          navigate("/dashboard");
         })
         .catch((err) => {
           // setLoading(false);

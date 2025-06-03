@@ -12,7 +12,7 @@ const StatsCards = ({ totalNotes, todos, links, note }) => {
 
       <div className="card bg-base-100 shadow">
         <div className="card-body">
-          <h2 className="card-title">To-dos</h2>
+          <h2 className="card-title">Task</h2>
           <p className="text-3xl">{todos.length}</p>
           <div className="text-sm">
             {todos.filter((todo) => todo.completed === true).length} completed

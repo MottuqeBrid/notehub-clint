@@ -4,6 +4,8 @@ import AddNoteModal from "../AddNoteModal/AddNoteModal";
 import NotesPage from "../NotesPage/NotesPage";
 import StatsCards from "../StatsCards/StatsCards";
 import axios from "axios";
+// import { useNavigate } from "react-router";
+// import useAuth from "../hooks/useAuth";
 
 export default function Dashboard() {
   const [showModal, setShowModal] = useState(false);
@@ -17,6 +19,29 @@ export default function Dashboard() {
   const [note, setNote] = useState(
     totalNotes?.filter((todo) => todo.type === "Note")
   );
+
+  const [searchText, setSearchText] = useState("");
+  const [results, setResults] = useState([]);
+  // const { user, loading } = useAuth();
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   if (
+  //     !loading &&
+  //     user &&
+  //     !user?.isBlocked &&
+  //     !user?.isVerified &&
+  //     user?.userType === "user"
+  //   ) {
+  //     navigate("/otp");
+  //   }
+  //   else if(!loading &&
+  //     user &&
+  //     user?.isBlocked &&
+  //     !user?.isVerified &&
+  //     user?.userType === "user"){
+  //       navigate("/account-blocked");
+  //     }
+  // }, [user, loading, navigate]);
 
   useEffect(() => {
     axios
@@ -33,6 +58,21 @@ export default function Dashboard() {
     setLinks(totalNotes?.filter((todo) => todo.type === "Link"));
     setNote(totalNotes?.filter((todo) => todo.type === "Note"));
   }, [totalNotes]);
+
+  useEffect(() => {
+    if (searchText.trim() === "") {
+      setResults(totalNotes);
+      return;
+    }
+
+    const filtered = totalNotes.filter((item) =>
+      (item.title + " " + item.description)
+        .toLowerCase()
+        .includes(searchText.toLowerCase())
+    );
+
+    setResults(filtered.reverse()); // latest first
+  }, [searchText, totalNotes]);
 
   const onSave = (newNote) => {
     setTotalNotes((prevNotes) => [newNote, ...prevNotes]);
@@ -55,9 +95,26 @@ export default function Dashboard() {
             links={links}
             note={note}
           />
+          {/* search bar */}
+          <div className="">
+            <input
+              type="text"
+              placeholder="Search by title or description..."
+              className="input input-bordered w-full mb-6"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+            />
+
+            {searchText.trim() !== "" && (
+              <p className="mb-4 text-sm text-gray-500">
+                {results.length} result{results.length !== 1 ? "s" : ""} found
+              </p>
+            )}
+          </div>
           <NotesPage
             setTotalNotes={setTotalNotes}
             todos={todos}
+            results={results}
             links={links}
             note={note}
             totalNotes={totalNotes}

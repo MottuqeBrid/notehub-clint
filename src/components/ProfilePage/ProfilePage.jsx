@@ -8,6 +8,7 @@ import PhotoUploadPopup from "../PhotoUploadPopup/PhotoUploadPopup";
 export default function ProfilePage() {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
+  console.log(user);
 
   useEffect(() => {
     axios
@@ -84,6 +85,10 @@ export default function ProfilePage() {
               {user.bio.hobbies && <p>🎯 Hobbies: {user.bio.hobbies}</p>}
               {user.bio.languages && <p>🗣️ Languages: {user.bio.languages}</p>}
               {user.bio.interests && <p>⭐ Interests: {user.bio.interests}</p>}
+              {user?.todo && <p>📝 Your Todo Items: {user?.todo?.length}</p>}
+              {user?.coverPage && (
+                <p>📔 You create cover page: {user?.coverPage?.length}</p>
+              )}
               {user.bio.achievements && (
                 <p>🏆 Achievements: {user.bio.achievements}</p>
               )}
