@@ -23,7 +23,7 @@ const PrivateRoute = ({ children }) => {
   }, [user, loading, navigate]);
 
   if (loading) {
-    return null; // or a loading spinner
+    return <div>Loading...</div>; // or a loading spinner
   }
 
   if (user?.isBlocked) {
@@ -37,10 +37,9 @@ const PrivateRoute = ({ children }) => {
     user?.userType === "user"
   ) {
     return children;
+  } else {
+    return null;
   }
-
-  // Optionally, return null or a fallback
-  return null;
 };
 
 export default PrivateRoute;
