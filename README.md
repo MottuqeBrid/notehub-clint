@@ -1,48 +1,35 @@
-# 🚚 Zap-Shift (Profast) – Parcel Delivery Web App
+# 📝 NoteHub is a Note store Web App
 
-A fully functional and responsive web application designed to streamline parcel delivery service management. Zap-Shift offers a complete solution for parcel tracking, role-based dashboards, and seamless user experience — all built using modern web technologies.
+This is a fully responsive application. This is a note management website. Several types of notes can be kept here.
 
 ---
 
 ## 📝 Project Overview
 
-**Zap-Shift** is a full-stack MERN (MongoDB, Express, React, Node.js) application designed to manage parcel delivery services effectively. It features real-time parcel tracking, secure user authentication, and dedicated dashboards for Admins, Delivery Personnel, and Customers.
+**NoteHub** is a frontend application designed to manage note. Here, users can easily open an account and save their daily notes.
 
 ---
 
 ## 🌐 Live Demo
 
-🔗 [Live Website](https://your-app-url.com) _(Replace with actual link)_
+🔗 [Live Website](https://notehub.toytree.top)
 
 ---
 
 ## 🛠️ Tech Stack
 
-### 🔧 Backend
-
-- **Node.js** – JavaScript runtime
-- **Express.js** – Backend framework
-- **MongoDB + Mongoose** – NoSQL database & ODM
-- **JWT (jsonwebtoken)** – Secure authentication
-- **Bcrypt.js** – Password hashing
-- **Dotenv** – Manage environment variables
-- **Nodemon** – Auto-reload during development
-
 ### 🎨 Frontend
 
 - **React.js** – Frontend library
-- **React Router DOM** – Client-side routing
+- **React Router** – Client-side routing
 - **Tailwind CSS** – Utility-first CSS
 - **DaisyUI** – UI components
 - **Axios** – HTTP client
 - **SweetAlert2** – Alert & confirmation modals
-- **JWT-decode** – Decode JWT tokens on frontend
 
 ---
 
 ## 🌟 Main Features
-
-this is main features
 
 ### 🔐 Authentication
 
@@ -51,25 +38,18 @@ this is main features
 
 ### 📦 Parcel Management
 
-- Create, update, cancel, and deliver parcels
-- Real-time status tracking
-- Order history and logs
+- Create, update, delete, and edit Note
 
 ### 🧑‍💼 Role-Based Dashboards
 
-- **Admin**: Manage users, parcels, analytics
-- **Delivery Personnel**: View assigned parcels, update delivery status
-- **Customer**: Place orders, track parcels, view delivery logs
+- **Admin**: Manage users
+- **user**: Create Note, Edit Note, Delete Note
 
 ### 📊 Dashboard Features
 
-- Parcel status summary
-- Visual charts (optional)
-- Filter and search functionality
-
-### ✉️ Notifications _(Optional/Pluggable)_
-
-- Email or SMS alerts (if implemented)
+- view total Note
+- Filter Note
+- Search Note
 
 ---
 
@@ -80,8 +60,11 @@ this is main features
 ### 📦 Backend Setup
 
 ```bash
+# Clone Repo
+git clone https://github.com/MottuqeBrid/notehub-clint.git
+
 # Navigate to server
-cd server
+cd notehub-clint
 
 # Install dependencies
 npm install
